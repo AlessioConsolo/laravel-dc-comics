@@ -13,7 +13,7 @@ class ComicController extends Controller
         $comics = Comic::all();
 
         // Ritorna la vista 'comics.index' e passa la variabile $comics alla vista
-        return view('comics.index', ['comics' => $comics]);
+        return view('comics.index', compact('comics'));
     }
 
     public function show($id)

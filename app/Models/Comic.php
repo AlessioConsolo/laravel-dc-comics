@@ -20,4 +20,9 @@ class Comic extends Model
         'artists',
         'writers',
     ];
+
+    protected $casts = [
+        'artists' => 'array',
+        'writers' => 'array',
+    ];
 }
