@@ -13,37 +13,37 @@
 
         <div>
             <label for="title">Titolo:</label>
-            <input type="text" id="title" name="title" value="{{ old('title') }}" required>
+            <input type="text" id="title" name="title" required>
         </div>
 
         <div>
             <label for="description">Descrizione:</label>
-            <textarea id="description" name="description" required>{{ old('description') }}</textarea>
+            <textarea id="description" name="description" required></textarea>
         </div>
 
         <div>
             <label for="thumb">URL Copertina:</label>
-            <input type="text" id="thumb" name="thumb" value="{{ old('thumb') }}" required>
+            <input type="text" id="thumb" name="thumb" required>
         </div>
 
         <div>
             <label for="price">Prezzo:</label>
-            <input type="number" step="0.01" id="price" name="price" value="{{ old('price') }}" required>
+            <input type="number" step="0.01" id="price" name="price" required>
         </div>
 
         <div>
             <label for="series">Serie:</label>
-            <input type="text" id="series" name="series" value="{{ old('series') }}" required>
+            <input type="text" id="series" name="series" required>
         </div>
 
         <div>
             <label for="sale_date">Data di uscita:</label>
-            <input type="date" id="sale_date" name="sale_date" value="{{ old('sale_date') }}" required>
+            <input type="date" id="sale_date" name="sale_date" required>
         </div>
 
         <div>
             <label for="type">Tipo:</label>
-            <input type="text" id="type" name="type" value="{{ old('type') }}" required>
+            <input type="text" id="type" name="type" required>
         </div>
 
         <button type="submit">Salva Fumetto</button>
