@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modifica Fumetto</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title', 'Modifica Fumetto')
+
+@section('content')
     <h1>Modifica Fumetto: {{ $comic->title }}</h1>
 
     @if ($errors->any())
@@ -82,5 +79,4 @@
     </form>
 
     <a href="{{ route('comics.index') }}">Torna alla lista dei fumetti</a>
-</body>
-</html>
+@endsection

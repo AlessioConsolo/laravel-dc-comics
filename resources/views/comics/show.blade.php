@@ -1,20 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $comic->title }}</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title', $comic->title)
+
+@section('content')
     <h1>{{ $comic->title }}</h1>
 
-    <img src="{{ $comic->thumb }}" alt="{{ $comic->title }}">
-    <p>{{ $comic->description }}</p>
-    <p>Prezzo: {{ $comic->price }} €</p>
-    <p>Serie: {{ $comic->series }}</p>
-    <p>Data di uscita: {{ $comic->sale_date }}</p>
-    <p>Tipo: {{ $comic->type }}</p>
+    <div>
+        <strong>Descrizione:</strong>
+        <p>{{ $comic->description }}</p>
+    </div>
 
-    <a href="{{ route('comics.index') }}">Torna alla lista</a>
-</body>
-</html>
+    <div>
+        <strong>Copertina:</strong>
+        <img src="{{ $comic->thumb }}" alt="{{ $comic->title }} cover" style="max-width: 200px;">
+    </div>
+
+    <div>
+        <strong>Prezzo:</strong>
+        <p>${{ number_format((float) $comic->price, 2) }}</p>
+    </div>
+
+    <div>
+        <strong>Serie:</strong>
+        <p>{{ $comic->series }}</p>
+    </div>
+
+    <div>
+        <strong>Data di uscita:</strong>
+        <p>{{ \Carbon\Carbon::parse($comic->sale_date)->format('d/m/Y') }}</p>
+    </div>
+
+    <div>
+        <strong>Tipo:</strong>
+        <p>{{ $comic->type }}</p>
+    </div>
+
+    <div>
+        <a href="{{ route('comics.edit', $comic->id) }}">Modifica Fumetto</a>
+    </div>
+
+    <div>
+        <a href="{{ route('comics.index') }}">Torna alla lista dei fumetti</a>
+    </div>
+@endsection
