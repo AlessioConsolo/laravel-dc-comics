@@ -7,44 +7,46 @@ use Illuminate\Http\Request;
 
 class ComicController extends Controller
 {
-    public function index()
-    {
-        // Recupera tutti i fumetti
-        $comics = Comic::all();
-
-        // Ritorna la vista 'comics.index' e passa la variabile $comics alla vista
-        return view('comics.index', compact('comics'));
-    }
-
-    public function show($id)
-    {
-        // Recupera il fumetto per ID
-        $comic = Comic::findOrFail($id);
-        // Ritorna la vista con i dettagli del fumetto
-        return view('comics.show', ['comic' => $comic]);
-    }
-
-    public function create()
-    {
-        return view('comics.create');
-    }
-
     public function store(Request $request)
     {
-        $data = $request->validate([
+        $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'thumb' => 'required|string',
-            'price' => 'required|numeric',
-            'series' => 'required|string',
+            'description' => 'nullable|string',
+            'thumb' => 'nullable|url|max:1024',
+            'price' => 'required|numeric|min:0',
+            'series' => 'required|string|max:255',
             'sale_date' => 'required|date',
-            'type' => 'required|string',
+            'type' => 'required|string|max:255',
+            'artists' => 'nullable|array',
+            'artists.*' => 'string|max:255',
+            'writers' => 'nullable|array',
+            'writers.*' => 'string|max:255',
         ]);
 
-        // Crea un nuovo fumetto
-        Comic::create($data);
+        $comic = Comic::create($validatedData);
 
-        return redirect()->route('comics.index');
+        return redirect()->route('comics.index')->with('success', 'Fumetto creato con successo!');
     }
 
+    public function update(Request $request, Comic $comic)
+    {
+
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'thumb' => 'nullable|url|max:1024',
+            'price' => 'required|numeric|min:0',
+            'series' => 'required|string|max:255',
+            'sale_date' => 'required|date',
+            'type' => 'required|string|max:255',
+            'artists' => 'nullable|array',
+            'artists.*' => 'string|max:255',
+            'writers' => 'nullable|array',
+            'writers.*' => 'string|max:255',
+        ]);
+
+        $comic->update($validatedData);
+
+        return redirect()->route('comics.index')->with('success', 'Fumetto aggiornato con successo!');
+    }
 }
